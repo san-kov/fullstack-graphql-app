@@ -2,9 +2,14 @@ body {
   font-family: 'Roboto';
   background: $black;
   background-size: cover;
+  color: $grey;
 }
 
 * {
   margin: 0;
   padding: 0;
+}
+
+.app {
+  margin: 10px;
 }

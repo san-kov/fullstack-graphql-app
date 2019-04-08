@@ -1,14 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header: React.SFC<{}> = () => {
   return (
     <div className="header">
       <nav>
-        <a className="logo">SeriesQL</a>
+        <Link to="/" className="logo">
+          SeriesQL
+        </Link>
       </nav>
       <nav>
-        <a href="#">Log In</a>
-        <a href="#">Sign Up</a>
+        <Link to="/login">Log In</Link>
+        <Link to="/signup">Signup</Link>
       </nav>
     </div>
   )

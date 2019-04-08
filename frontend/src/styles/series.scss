@@ -1,17 +1,17 @@
 .series-list {
   background: rgb(24, 24, 24);
-  margin: 10px;
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  grid-template-rows: repeat(2, 200px);
+  grid-template-rows: 200px;
   grid-auto-rows: 200px;
   grid-gap: 10px;
 }
 
 .series {
   position: relative;
+  overflow: hidden;
   img {
     margin: 0;
     width: 100%;
@@ -20,8 +20,8 @@
   }
 
   .info {
-    overflow: hidden;
     position: absolute;
+    z-index: 1;
 
     background: linear-gradient(
       to bottom right,
@@ -30,8 +30,8 @@
     );
     color: $grey;
     width: 100%;
-    height: 60px;
-    padding: 5px;
+
+    max-height: 80px;
     > p {
       margin: 5px;
     }
@@ -39,11 +39,18 @@
     > .desc {
       font-size: 12px;
     }
+
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.01);
+    }
   }
   .controls {
     position: absolute;
     bottom: 10px;
     right: 10px;
+
+    z-index: 2;
     > button {
       border: 0;
       padding: 5px;
