@@ -1,0 +1,43 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/jest": "24.0.11",
+    "@types/node": "11.13.0",
+    "@types/react": "16.8.12",
+    "@types/react-dom": "16.8.3",
+    "apollo": "^2.8.1",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link": "^1.2.11",
+    "apollo-link-error": "^1.1.10",
+    "apollo-link-http": "^1.5.14",
+    "apollo-link-retry": "^2.2.13",
+    "dotenv": "^7.0.0",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
+    "node-sass": "^4.11.0",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.4",
+    "react-dom": "^16.8.6",
+    "react-scripts": "2.1.8",
+    "typescript": "3.4.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "apollo:generate": "apollo codegen:generate --target typescript --excludes=C:/Users/User/Desktop/coding/apollo-ts/src/node_modules/* --includes=C:/Users/User/Desktop/coding/graphql-fullstack-app/frontend/src/graphql/*.ts --endpoint http://localhost:8080/graphql --tagName=gql --outputFlat src/generated"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

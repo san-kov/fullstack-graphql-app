@@ -1,0 +1,33 @@
+.header {
+  padding: 15px;
+  background: $black;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  .nav {
+    display: flex;
+    height: 100%;
+    align-items: baseline;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    height: 30px;
+    outline: none;
+    transition: all 0.15s ease;
+    &:hover {
+      color: $green;
+    }
+  }
+
+  .logo {
+    color: $green;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 25px;
+  }
+}

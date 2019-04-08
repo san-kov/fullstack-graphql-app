@@ -1,0 +1,62 @@
+.series-list {
+  background: rgb(24, 24, 24);
+  margin: 10px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  grid-template-rows: repeat(2, 200px);
+  grid-auto-rows: 200px;
+  grid-gap: 10px;
+}
+
+.series {
+  position: relative;
+  img {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info {
+    overflow: hidden;
+    position: absolute;
+
+    background: linear-gradient(
+      to bottom right,
+      rgba(15, 15, 15, 0.795),
+      rgba(255, 255, 255, 0)
+    );
+    color: $grey;
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+    > p {
+      margin: 5px;
+    }
+
+    > .desc {
+      font-size: 12px;
+    }
+  }
+  .controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    > button {
+      border: 0;
+      padding: 5px;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: white;
+      background: rgba(125, 240, 125, 0.637);
+      outline: none;
+      cursor: pointer;
+      transition: all 0.1s ease-out;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
