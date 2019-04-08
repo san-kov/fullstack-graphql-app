@@ -17,3 +17,18 @@ export const getSeries = gql`
     }
   }
 `
+
+export const getSeriesById = gql`
+  query SeriesItemData($id: String!) {
+    getSeriesById(id: $id) {
+      id
+      title
+      description
+      episodes {
+        title
+        description
+        id
+      }
+    }
+  }
+`

@@ -17,6 +17,7 @@
     "apollo-link-retry": "^2.2.13",
     "dotenv": "^7.0.0",
     "graphql": "^14.1.1",
+    "graphql-codegen": "^0.4.0",
     "graphql-tag": "^2.10.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.6",
@@ -31,7 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "apollo:generate": "apollo codegen:generate --target typescript --excludes=C:/Users/User/Desktop/coding/apollo-ts/src/node_modules/* --includes=C:/Users/User/Desktop/coding/graphql-fullstack-app/frontend/src/graphql/*.ts --endpoint http://localhost:8080/graphql --tagName=gql --outputFlat src/generated"
+    "generate": "graphql-codegen",
+    "apollo:generate": "apollo codegen:generate --target typescript --excludes=C:/Users/User/Desktop/coding/apollo-ts/src/node_modules/* --includes=C:/Users/User/Desktop/coding/graphql-fullstack-app/frontend/src/graphql/*.ts --endpoint http://localhost:8080/graphql --tagName=gql --outputFlat src/generated --withHOC=true"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +43,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@graphql-codegen/typescript": "^1.0.7"
+  }
 }

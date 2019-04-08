@@ -1,0 +1,8 @@
+generates:
+./graphql/seriesQuery.ts:
+  plugins:
+    - typescript
+    - typescript-operations
+    - typescript-react-apollo
+  config:
+    withHOC: true
