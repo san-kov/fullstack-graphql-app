@@ -23,6 +23,7 @@
     "react": "^16.8.6",
     "react-apollo": "^2.5.4",
     "react-dom": "^16.8.6",
+    "react-icons": "^3.5.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "typescript": "3.4.2"
@@ -33,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generate": "graphql-codegen",
-    "apollo:generate": "apollo codegen:generate --target typescript --excludes=C:/Users/User/Desktop/coding/apollo-ts/src/node_modules/* --includes=C:/Users/User/Desktop/coding/graphql-fullstack-app/frontend/src/graphql/*.ts --endpoint http://localhost:8080/graphql --tagName=gql --outputFlat src/generated --withHOC=true"
+    "apollo:generate": "apollo codegen:generate --target typescript --excludes=C:/Users/User/Desktop/coding/apollo-ts/src/node_modules/* --includes=C:/Users/User/Desktop/coding/graphql-fullstack-app/frontend/src/graphql/*.ts --endpoint http://localhost:8080/graphql --tagName=gql --outputFlat src/generated"
   },
   "eslintConfig": {
     "extends": "react-app"

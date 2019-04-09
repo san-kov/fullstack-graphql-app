@@ -16,7 +16,7 @@ const SeriesList: React.SFC<{}> = props => {
         return (
           <div className="series-list">
             {data.getAllSeries!.map(series => (
-              <Series series={series} />
+              <Series item={false} series={series} />
             ))}
           </div>
         )

@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { Query, graphql, ChildDataProps } from 'react-apollo'
+import React from 'react'
+import { graphql, ChildDataProps } from 'react-apollo'
 import {
   SeriesItemData,
   SeriesItemDataVariables
-} from '../generated/SeriesItemData'
-import { getSeriesById } from '../graphql/seriesQuery'
+} from '../../generated/SeriesItemData'
+import { getSeriesById } from '../../graphql/seriesQuery'
+import Series from '../Series/Series'
 
 interface ISeriesItemProps {
   id: string
@@ -21,7 +22,13 @@ const SeriesItem: React.SFC<ChildProps> = ({ data }) => {
 
   if (!data.getSeriesById || data.error) return null
 
-  return <div>{JSON.stringify(data.getSeriesById)}</div>
+  return (
+    <div>
+      <Series item series={data.getSeriesById} />
+      <div>{data.getSeriesById.description}</div>
+      <button>Add to watchlist</button>
+    </div>
+  )
 }
 
 const withSeriesItem = graphql<

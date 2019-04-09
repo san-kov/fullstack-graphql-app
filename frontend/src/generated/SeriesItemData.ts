@@ -18,6 +18,8 @@ export interface SeriesItemData_getSeriesById {
   id: string;
   title: string;
   description: string;
+  imageURL: string;
+  rating: number;
   episodes: SeriesItemData_getSeriesById_episodes[] | null;
 }
 

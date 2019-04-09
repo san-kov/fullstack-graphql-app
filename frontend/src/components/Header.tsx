@@ -1,7 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
 
-const Header: React.SFC<{}> = () => {
+const Header: React.SFC<RouteComponentProps> = ({
+  history: {
+    location: { pathname }
+  }
+}) => {
   return (
     <div className="header">
       <nav>
@@ -10,11 +14,21 @@ const Header: React.SFC<{}> = () => {
         </Link>
       </nav>
       <nav>
-        <Link to="/login">Log In</Link>
-        <Link to="/signup">Signup</Link>
+        <Link
+          to="/login"
+          className={pathname === '/login' ? 'active-link' : ''}
+        >
+          Log In
+        </Link>
+        <Link
+          to="/signup"
+          className={pathname === '/signup' ? 'active-link' : ''}
+        >
+          Signup
+        </Link>
       </nav>
     </div>
   )
 }
 
-export default Header
+export default withRouter(Header)

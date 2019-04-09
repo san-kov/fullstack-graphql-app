@@ -1,34 +1,22 @@
 import gql from 'graphql-tag'
+import { SERIES_FRAGMENT, SERIES_ITEM_FRAGMENT } from './fragments'
 
 export const getSeries = gql`
   query SeriesData {
     getAllSeries {
-      id
-      title
-      description
-      episodes {
-        id
-        title
-        description
-        rating
-        imageURL
-      }
-      imageURL
+      ...Series
     }
   }
+
+  ${SERIES_FRAGMENT}
 `
 
 export const getSeriesById = gql`
   query SeriesItemData($id: String!) {
     getSeriesById(id: $id) {
-      id
-      title
-      description
-      episodes {
-        title
-        description
-        id
-      }
+      ...SeriesItem
     }
   }
+
+  ${SERIES_ITEM_FRAGMENT}
 `

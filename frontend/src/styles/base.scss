@@ -1,13 +1,20 @@
+*,
+html {
+  margin: 0;
+  padding: 0;
+}
 body {
   font-family: 'Roboto';
   background: $black;
   background-size: cover;
   color: $grey;
-}
-
-* {
+  height: 100vh;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+}
+.root {
+  height: 100%;
 }
 
 .app {
@@ -19,4 +26,19 @@ a {
   text-decoration: none;
   height: 30px;
   outline: none;
+}
+
+button {
+  border: 0;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+  background: rgba(125, 240, 125, 0.637);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+  &:hover {
+    transform: scale(1.05);
+  }
 }

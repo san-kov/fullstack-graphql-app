@@ -1,0 +1,64 @@
+.form {
+  min-width: 30%;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+  h1 {
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+
+  background: rgba(19, 102, 102, 0.425);
+  border-radius: 5px;
+  text-align: center;
+  height: auto;
+
+  form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    input,
+    button {
+      margin: 5px;
+    }
+
+    input {
+      border: 0;
+      padding: 5px;
+      outline: none;
+      height: 25px;
+      background: rgba(27, 148, 122, 0.199);
+      color: $grey;
+      font-size: 15px;
+    }
+
+    button {
+      height: 50px;
+      font-size: 15px;
+      font-weight: bold;
+      background: rgb(36, 216, 126);
+      color: rgb(15, 26, 51);
+    }
+
+    ::placeholder {
+      color: $grey;
+    }
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px rgb(42, 143, 112) inset !important;
+  border: 0 !important;
+  color: $grey !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: $grey !important;
+}

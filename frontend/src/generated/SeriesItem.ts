@@ -3,18 +3,22 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SeriesData
+// GraphQL fragment: SeriesItem
 // ====================================================
 
-export interface SeriesData_getAllSeries {
+export interface SeriesItem_episodes {
+  __typename: "Episode";
+  title: string;
+  description: string;
+  id: string;
+}
+
+export interface SeriesItem {
   __typename: "Series";
   id: string;
   title: string;
   description: string;
   imageURL: string;
   rating: number;
-}
-
-export interface SeriesData {
-  getAllSeries: SeriesData_getAllSeries[] | null;
+  episodes: SeriesItem_episodes[] | null;
 }
