@@ -8,6 +8,6 @@ export const register = gql`
       id
       email
       username
-    }
+    } 
   }
 `

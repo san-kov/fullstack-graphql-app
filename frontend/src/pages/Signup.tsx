@@ -15,7 +15,7 @@ interface FormProps {
   password: string
 }
 
-type ChildProps = ChildMutateProps<Register, RegisterVariables> &
+type ChildProps = ChildMutateProps<{}, Register, RegisterVariables> &
   RouteComponentProps &
   FormikProps<FormProps>
 
