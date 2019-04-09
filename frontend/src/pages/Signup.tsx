@@ -2,13 +2,24 @@ import React from 'react'
 import { TiMail, TiLockClosed, TiUser } from 'react-icons/ti'
 import { withFormik, FormikProps, Field, Form } from 'formik'
 import Loader from '../components/Loader'
+import { graphql, ChildMutateProps } from 'react-apollo'
+import { Register, RegisterVariables } from '../generated/Register'
+import { register } from '../graphql/userQuery'
+
+import { compose } from 'recompose'
+import { withRouter, RouteComponentProps } from 'react-router'
+
 interface FormProps {
   email: string
   username: string
   password: string
 }
 
-const Signup: React.SFC<FormikProps<FormProps>> = ({ isSubmitting }) => {
+type ChildProps = ChildMutateProps<Register, RegisterVariables> &
+  RouteComponentProps &
+  FormikProps<FormProps>
+
+const Signup: React.SFC<ChildProps> = ({ isSubmitting }) => {
   return (
     <div className="form">
       <h1>Sign Up</h1>
@@ -27,7 +38,7 @@ const Signup: React.SFC<FormikProps<FormProps>> = ({ isSubmitting }) => {
           <Field
             type="text"
             name="username"
-            placeholder="password"
+            placeholder="username"
             disabled={isSubmitting}
           />
         </div>
@@ -48,9 +59,24 @@ const Signup: React.SFC<FormikProps<FormProps>> = ({ isSubmitting }) => {
   )
 }
 
-const withSignupForm = withFormik<{}, FormProps>({
-  handleSubmit: (values, { setSubmitting }) => {
+const withSignupForm = withFormik<ChildProps, FormProps, RouteComponentProps>({
+  handleSubmit: async (
+    { email, password, username },
+    { setSubmitting, props: { mutate, history }, resetForm }
+  ) => {
     setSubmitting(true)
+
+    await mutate({
+      variables: {
+        email,
+        username,
+        password
+      }
+    })
+
+    setSubmitting(false)
+    resetForm()
+    history.push('/login')
   },
   mapPropsToValues: () => ({
     email: '',
@@ -59,4 +85,10 @@ const withSignupForm = withFormik<{}, FormProps>({
   })
 })
 
-export default withSignupForm(Signup)
+const withRegisterMutation = graphql<ChildProps>(register)
+
+export default compose<ChildProps, {}>(
+  withRouter,
+  withRegisterMutation,
+  withSignupForm
+)(Signup)
