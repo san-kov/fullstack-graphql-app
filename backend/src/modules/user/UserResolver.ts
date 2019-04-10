@@ -19,7 +19,7 @@ export class UserResolver {
     const user = await User.findOne({ where: { email } })
     if (!user) return null
 
-    const valid = bcrypt.compare(password, user.password)
+    const valid = await bcrypt.compare(password, user.password)
 
     if (!valid) return null
 
@@ -49,12 +49,9 @@ export class UserResolver {
     return user
   }
 
-  @Query(() => User)
+  @Query(() => User, { nullable: true })
   async me(@Ctx() ctx: Context): Promise<User | null> {
     const userId = (ctx.req as any).userId
-    if (!userId) {
-      return null
-    }
 
     const user = await User.findOne({ where: { id: userId } })
     if (!user) return null

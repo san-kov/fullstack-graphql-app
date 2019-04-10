@@ -11,13 +11,13 @@ const Series: React.SFC<ISeriesProps> = ({ series, item = false }) => {
   return (
     <div key={series.id} className="series">
       <div className="info">
-        <p>
+        <div className="p">
           {series.title}
           <div>
             <TiStar color="yellow" />
             {series.rating}
           </div>
-        </p>
+        </div>
         {!item && <p className="desc">{series.description}</p>}
       </div>
       {!item && (
