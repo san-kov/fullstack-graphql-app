@@ -4,6 +4,7 @@
   width: 20px;
   height: 20px;
   align-self: center;
+  justify-self: center;
 }
 .lds-ring div {
   box-sizing: border-box;
@@ -32,4 +33,12 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.loader-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

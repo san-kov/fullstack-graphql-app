@@ -7,7 +7,8 @@ import { RetryLink } from 'apollo-link-retry'
 const BACKEND_URL = 'http://localhost:8080/graphql'
 
 const httpLink = new HttpLink({
-  uri: BACKEND_URL
+  uri: BACKEND_URL,
+  credentials: 'include'
 })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
