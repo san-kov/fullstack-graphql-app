@@ -4,18 +4,29 @@ import {
   Mutation,
   Arg,
   FieldResolver,
-  Root
+  Root,
+  UseMiddleware,
+  Authorized
 } from 'type-graphql'
 import { v4 } from 'uuid'
 
 import { Series } from '../../entities/Series'
 import { Episode } from '../../entities/Eposide'
+import { logger } from '../../middleware/logger'
 
 @Resolver(Series)
 export class SeriesResolver {
+  @UseMiddleware(logger)
   @Query(() => [Series], { nullable: true })
   async getAllSeries(): Promise<Series[]> {
     const series: Series[] = await Series.find()
+    return series
+  }
+
+  @Query(() => Series, { nullable: true })
+  async getSeriesById(@Arg('id') id: string): Promise<Series | null> {
+    const series = await Series.findOne({ where: { id } })
+    if (!series) return null
     return series
   }
 
@@ -33,6 +44,7 @@ export class SeriesResolver {
     return null
   }
 
+  @Authorized()
   @Mutation(() => Series)
   async addSeries(
     @Arg('title') title: string,

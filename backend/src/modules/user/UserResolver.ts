@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Ctx, Query } from 'type-graphql'
+import { Resolver, Mutation, Arg, Ctx, Query, Authorized } from 'type-graphql'
 import bcrypt from 'bcryptjs'
 import { User } from '../../entities/User'
 
@@ -19,7 +19,7 @@ export class UserResolver {
     const user = await User.findOne({ where: { email } })
     if (!user) return null
 
-    const valid = bcrypt.compare(password, user.password)
+    const valid = await bcrypt.compare(password, user.password)
 
     if (!valid) return null
 
@@ -49,12 +49,10 @@ export class UserResolver {
     return user
   }
 
+  @Authorized()
   @Query(() => User)
   async me(@Ctx() ctx: Context): Promise<User | null> {
     const userId = (ctx.req as any).userId
-    if (!userId) {
-      return null
-    }
 
     const user = await User.findOne({ where: { id: userId } })
     if (!user) return null

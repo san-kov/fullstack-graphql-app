@@ -21,6 +21,10 @@ export class Series extends BaseEntity {
   episodes: Episode[]
 
   @Field()
-  @Column({ unique: true, name: 'image_url' })
+  @Column({ name: 'image_url' })
   imageURL: string
+
+  @Field()
+  @Column({ type: 'float', default: 0 })
+  rating: number
 }

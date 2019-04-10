@@ -12,29 +12,29 @@ import { EpisodeResolver } from './modules/episode/EpisodeResolver'
 import jwt from 'jsonwebtoken'
 
 import cookieParser from 'cookie-parser'
-import cors from 'cors'
 
 const start = async () => {
   await createConnection()
 
   const schema = await buildSchema({
-    resolvers: [UserResolver, SeriesResolver, EpisodeResolver]
+    resolvers: [UserResolver, SeriesResolver, EpisodeResolver],
+    authChecker: ({ context: { req } }) => !!req.userId
   })
+
   const app = express()
 
   app.use(cookieParser())
-  app.use(
-    cors({
-      credentials: true
-    })
-  )
 
   app.use((req, _, next) => {
     const { token } = req.cookies
     if (token) {
-      const { userId } = jwt.verify(token, 'kek') as any
-      let myReq = req as any
-      myReq.userId = userId
+      try {
+        const { userId } = jwt.verify(token, 'kek') as any
+        let myReq = req as any
+        myReq.userId = userId
+      } catch (e) {
+        next()
+      }
     }
 
     next()
@@ -44,7 +44,10 @@ const start = async () => {
     context: ({ req, res }) => ({ req, res })
   })
 
-  apolloServer.applyMiddleware({ app })
+  apolloServer.applyMiddleware({
+    app,
+    cors: { origin: 'http://localhost:3000', credentials: true }
+  })
 
   app.listen(8080, () => console.log('listening on 8080'))
 }
