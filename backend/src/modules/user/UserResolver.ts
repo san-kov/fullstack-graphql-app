@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Ctx, Query, Authorized } from 'type-graphql'
+import { Resolver, Mutation, Arg, Ctx, Query } from 'type-graphql'
 import bcrypt from 'bcryptjs'
 import { User } from '../../entities/User'
 
@@ -49,8 +49,7 @@ export class UserResolver {
     return user
   }
 
-  @Authorized()
-  @Query(() => User)
+  @Query(() => User, { nullable: true })
   async me(@Ctx() ctx: Context): Promise<User | null> {
     const userId = (ctx.req as any).userId
 
