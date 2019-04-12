@@ -91,3 +91,8 @@ input:-webkit-autofill:active {
 input:-webkit-autofill {
   -webkit-text-fill-color: $grey !important;
 }
+
+.error-message {
+  text-align: center;
+  color: $red;
+}
