@@ -92,16 +92,36 @@ const withLoginForm = withFormik<ChildProps, FormProps, RouteComponentProps>({
   ) => {
     setSubmitting(true)
 
-    const res = await mutate({
-      variables: {
-        email,
-        password
-      },
-      refetchQueries: [{ query: getCurrentUser }]
-    })
+    try {
+      const res = await mutate({
+        variables: {
+          email,
+          password
+        },
+        refetchQueries: [{ query: getCurrentUser }]
+      })
 
-    resetForm()
-    history.push('/')
+      resetForm()
+      history.push('/')
+    } catch (e) {
+      console.log(e.graphQLErrors)
+      e.graphQLErrors.forEach((err: any) => {
+        if (!err.extensions)
+          return setFieldError('general', 'Internal server error')
+        err.extensions.exception.validationErrors.forEach((err2: any) => {
+          setFieldError(
+            err2.property,
+            err2.constraints[Object.keys(err2.constraints)[0]]
+          )
+          console.log(
+            err2.property,
+            err2.constraints[Object.keys(err2.constraints)[0]]
+          )
+        })
+      })
+    }
+
+    setSubmitting(false)
   },
   mapPropsToValues: () => ({
     email: '',

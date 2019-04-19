@@ -35,9 +35,11 @@ const Header: React.SFC<RouteComponentProps> = ({
           <a
             href="#"
             onClick={async e => {
-              e.preventDefault()
-              await handleLogout()
-              push('/login')
+              if (confirm('are you sure?')) {
+                e.preventDefault()
+                await handleLogout()
+                push('/login')
+              }
             }}
           >
             Logout

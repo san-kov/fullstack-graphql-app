@@ -11,7 +11,6 @@ export class UniqueEmailConstraint implements ValidatorConstraintInterface {
   validate(email: string) {
     return User.findOne({ where: { email } }).then(user => {
       if (user) {
-        console.log(user)
         return false
       }
       return true

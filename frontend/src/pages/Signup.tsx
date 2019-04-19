@@ -105,21 +105,33 @@ const withSignupForm = withFormik<ChildProps, FormProps, RouteComponentProps>({
   validationSchema: validationSchema,
   handleSubmit: async (
     { email, password, username },
-    { setSubmitting, props: { mutate, history }, resetForm }
+    { setSubmitting, props: { mutate, history }, resetForm, setFieldError }
   ) => {
     setSubmitting(true)
 
-    await mutate({
-      variables: {
-        email,
-        username,
-        password
-      }
-    })
+    try {
+      await mutate({
+        variables: {
+          email,
+          username,
+          password
+        }
+      })
 
+      resetForm()
+      history.push('/login')
+    } catch (e) {
+      console.log(e.graphQLErrors)
+      e.graphQLErrors.forEach((err: any) => {
+        err.extensions.exception.validationErrors.forEach((err2: any) => {
+          setFieldError(
+            err2.property,
+            err2.constraints[Object.keys(err2.constraints)[0]]
+          )
+        })
+      })
+    }
     setSubmitting(false)
-    resetForm()
-    history.push('/login')
   },
   mapPropsToValues: () => ({
     email: '',
