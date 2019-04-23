@@ -16,6 +16,8 @@ export const formatErrors = (errors: CustomError[]): ArgumentValidationError =>
         [error.path]: error.message
       }
 
+      
+
       return valErr
     })
   )
