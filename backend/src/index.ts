@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import express from 'express'
 
 import { ApolloServer } from 'apollo-server-express'
-import { buildSchema } from 'type-graphql'
+import { buildSchema, ArgumentValidationError } from 'type-graphql'
 import { createConnection } from 'typeorm'
 
 import { UserResolver } from './modules/user/UserResolver'
@@ -12,6 +12,7 @@ import { EpisodeResolver } from './modules/episode/EpisodeResolver'
 import jwt from 'jsonwebtoken'
 
 import cookieParser from 'cookie-parser'
+import { GraphQLError } from 'graphql'
 
 const start = async () => {
   await createConnection()
@@ -41,7 +42,20 @@ const start = async () => {
   })
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
+    formatError: (error: GraphQLError) => {
+      if (error.originalError instanceof ArgumentValidationError) {
+        return {
+          ...error,
+          extensions: {
+            ...error.extensions,
+            exception: { ...error!.extensions!.exception, stacktrace: '' }
+          }
+        }
+      }
+
+      return new GraphQLError('internal server error')
+    }
   })
 
   apolloServer.applyMiddleware({

@@ -19,7 +19,7 @@ const Header: React.SFC<RouteComponentProps> = ({
   let authorized: boolean
 
   console.log(data)
-  if (loading) return <p>loading</p>
+  if (loading) return null
   if (!data || error || !data.me) authorized = false
   else authorized = true
 
@@ -35,14 +35,16 @@ const Header: React.SFC<RouteComponentProps> = ({
           <a
             href="#"
             onClick={async e => {
-              e.preventDefault()
-              await handleLogout()
-              push('/login')
+              if (confirm('are you sure?')) {
+                e.preventDefault()
+                await handleLogout()
+                push('/login')
+              }
             }}
           >
             Logout
           </a>
-          <Link to="/logout">{data!.me!.username}</Link>
+          <Link to="/profile">{data!.me!.username}</Link>
         </nav>
       ) : (
         <nav>

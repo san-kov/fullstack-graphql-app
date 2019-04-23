@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Loader: React.SFC<{}> = () => {
+const LoaderScreen: React.SFC<{}> = () => {
   return (
     <div className="loader-screen">
       <div className="lds-ring">
@@ -13,4 +13,4 @@ const Loader: React.SFC<{}> = () => {
   )
 }
 
-export default Loader
+export default LoaderScreen
